@@ -24,7 +24,20 @@
   <nav class="topnav">
     <div class="container topnav__inner">
       <a href="#top" class="brand">Archie's W UK Guide</a>
-      <div class="topnav__links">
+
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav-links"
+        aria-label="Toggle navigation"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="topnav__links" id="site-nav-links">
         <a href="#route">Route</a>
         <a href="#scotland">Scotland</a>
         <a href="#york">York</a>
@@ -413,5 +426,23 @@
       <a class="site-footer__top" href="#top">Back to top</a>
     </div>
   </footer>
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.topnav__links');
+
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('is-open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      navLinks.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('is-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  </script>
 </body>
 </html>
